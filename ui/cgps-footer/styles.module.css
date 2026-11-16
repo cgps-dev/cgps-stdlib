@@ -1,0 +1,103 @@
+
+.site-footer {
+  margin-top: 48px;
+  padding: 48px 16px;
+  background: #282828;
+  color: #fff;
+  font-size: 16px;
+}
+
+.footer-wrap {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 16px;
+  max-width: 1360px;
+}
+
+.site-footer a.link {
+  color: #fff;
+  font-weight: 600;
+}
+
+.site-footer a.link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.footer-credit {
+  margin: 0;
+  color: color-mix(in srgb, #fff 66%, transparent);
+  padding: 0;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 24px;
+}
+
+.footer-brand-row {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 56px;
+}
+
+.footer-partners {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 44px;
+}
+
+.footer-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-logo-row span {
+  color: color-mix(in srgb, #fff 66%, transparent);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bdi-logo {
+  height: min(64px, 12vw);
+  object-fit: contain;
+}
+
+.psi-logo {
+  height: min(64px, 12vw);
+}
+
+.cgps-logo {
+  flex: 0 0 auto;
+}
+
+.cgps-logo img {
+  display: block;
+  height: min(64px, 12vw);
+}
+
+@media (max-width: 900px) {
+  .footer-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
+  }
+
+  .footer-brand-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .footer-cgps img {
+    width: min(360px, 80vw);
+  }
+}
