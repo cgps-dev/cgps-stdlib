@@ -5,6 +5,8 @@
   background: #282828;
   color: #fff;
   font-size: 16px;
+  display: flex;
+  justify-content: center;
 }
 
 .footer-wrap {
@@ -13,11 +15,13 @@
   align-items: start;
   gap: 16px;
   max-width: 1360px;
+  flex-grow: 1;
 }
 
 .site-footer a.link {
   color: #fff;
   font-weight: 600;
+  text-decoration: unset;
 }
 
 .site-footer a.link:hover {
