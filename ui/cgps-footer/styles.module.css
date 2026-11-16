@@ -87,6 +87,11 @@
   height: min(64px, 12vw);
 }
 
+.notes {
+  font-size: .8rem;
+  line-height: 1rem;
+}
+
 @media (max-width: 900px) {
   .footer-wrap {
     grid-template-columns: 1fr;

@@ -72,6 +72,10 @@ export default function Footer(props) {
           </div>
 
         </div>
+
+        <div className={styles["notes"]}>
+          { props.notes }
+        </div>
       </div>
     </footer>
   );
