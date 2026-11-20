@@ -11,6 +11,7 @@ import {
   PutObjectCommand,
   CopyObjectCommand,
   DeleteObjectCommand,
+  DeleteObjectsCommand,
   ListObjectsV2Command,
 } from "@aws-sdk/client-s3";
 
@@ -237,6 +238,7 @@ async function move(bucket, sourceKey, targetKey) {
 async function* listObjects(
   bucket,
   prefix,
+  options = {}
 ) {
   let continuationToken;
 
@@ -245,6 +247,7 @@ async function* listObjects(
       Bucket: bucket,
       ContinuationToken: continuationToken,
       Prefix: prefix,
+      ...options
     };
 
     const data = await client.send(new ListObjectsV2Command(params));
@@ -276,6 +279,19 @@ async function deleteObject(bucket, key) {
 
   await client.send(deleteCommand);
 }
+
+async function deleteObjects(bucket, keys) {
+  const CHUNK = 1000; // S3 limit per DeleteObjects
+
+  for (let i = 0; i < keys.length; i += CHUNK) {
+    const slice = keys.slice(i, i + CHUNK).map(Key => ({ Key }));
+    await client.send(new DeleteObjectsCommand({
+      Bucket: bucket,
+      Delete: { Objects: slice, Quiet: true },
+    }));
+  }
+}
+
 
 async function copyObject(bucket, sourceKey, targetKey, options = {}) {
   const copyCommand = new CopyObjectCommand({
@@ -392,6 +408,7 @@ async function uploadGzippedObjectToS3(bucket, key, data) {
 export default {
   copyObject,
   deleteObject,
+  deleteObjects,
   exists,
   generateSignedGetUrl,
   generateSignedUploadFastaUrl,
