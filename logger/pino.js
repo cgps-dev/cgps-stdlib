@@ -8,6 +8,8 @@ if (process.env.LOGGER_TARGET === "file") {
     dest: process.env.LOGGER_TARGET_FILE ?? "pw-local.log",
     sync: true,
   });
+  // eslint-disable-next-line no-console
+  console.log(`Logging to ${process.env.LOGGER_FILE}`);
 }
 
 if (process.env.NODE_ENV === "development") {
