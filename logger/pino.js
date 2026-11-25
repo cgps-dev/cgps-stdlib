@@ -5,7 +5,7 @@ let destination;
 
 if (process.env.LOGGER_TARGET === "file") {
   destination = pino.destination({
-    dest: process.env.LOGGER_TARGET_FILE ?? "pw-local.log",
+    dest: process.env.LOGGER_FILE ?? "pw-local.log",
     sync: true,
   });
   // eslint-disable-next-line no-console
