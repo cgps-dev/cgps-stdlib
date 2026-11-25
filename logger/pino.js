@@ -5,7 +5,7 @@ let transport;
 if (process.env.LOGGER_TARGET === "file") {
   transport = {
     target: "pino/file",
-    options: { destination: "./logs/pw-local.log" },
+    options: { destination: process.env.LOGGER_TARGET_FILE ?? "pw-local.log" },
   };
 }
 
