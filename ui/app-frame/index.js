@@ -94,7 +94,9 @@ function WindowBase(props) {
         </aside>
 
         <main
-        className={styles.workspace} aria-label={`${activeNav} workspace`}>
+          className={clsx(styles.workspace, props.className)}
+          aria-label={`${activeNav} workspace`}
+        >
           { props.children }
         </main>
       </div>
