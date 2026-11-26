@@ -68,9 +68,10 @@ if (process.env.AUTH_LDAP) {
   if (process.env.AUTH_LDAP_TLS_OPTIONS) {
     options.ldap.tlsOptions = JSON.parse(process.env.AUTH_LDAP_TLS_OPTIONS);
   }
-  if (process.env.AUTH_LDAP_TLS_OPTIONS_CRET_PATH) {
+  const ldapTlsOptionsCertPath = process.env.AUTH_LDAP_TLS_OPTIONS_CERT_PATH ?? process.env.AUTH_LDAP_TLS_OPTIONS_CRET_PATH;
+  if (ldapTlsOptionsCertPath) {
     options.ldap.tlsOptions ??= {};
-    options.ldap.tlsOptions.cret = [require("fs").readFileSync(process.env.AUTH_LDAP_TLS_OPTIONS_CRET_PATH)];
+    options.ldap.tlsOptions.cert = [require("fs").readFileSync(ldapTlsOptionsCertPath)];
   }
   if (process.env.AUTH_LDAP_TLS_OPTIONS_CA_PATH) {
     options.ldap.tlsOptions ??= {};
@@ -119,7 +120,12 @@ if (process.env.AUTH_OIDC) {
     "scope": process.env.AUTH_OIDC_SCOPE,
     "clientId": process.env.AUTH_OIDC_CLIENT_ID,
     "clientSecret": process.env.AUTH_OIDC_CLIENT_SECRET,
-    "checks": process.env.AUTH_OIDC_CHECKS,
+    "checks": process.env.AUTH_OIDC_CHECKS
+      ? process.env.AUTH_OIDC_CHECKS
+        .split(",")
+        .map((check) => check.trim())
+        .filter(Boolean)
+      : undefined,
     "idToken": process.env.AUTH_OIDC_ID_TOKEN,
     "idAttribute": process.env.AUTH_OIDC_ID_ATTRIBUTE,
     "token_endpoint_auth_method": process.env.AUTH_OIDC_TOKEN_ENDPOINT_AUTH_METHOD,
@@ -129,6 +135,7 @@ if (process.env.AUTH_OIDC) {
     "authorizationURL": process.env.AUTH_OIDC_AUTHORIZATION_URL,
     "tokenURL": process.env.AUTH_OIDC_TOKEN_URL,
     "userInfoURL": process.env.AUTH_OIDC_USER_INFO_URL,
+
   };
 }
 
