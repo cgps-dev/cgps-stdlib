@@ -9,10 +9,19 @@ const LoadingBarStyle = {
   right: 0,
 };
 
-function UiLoadingBar() {
+function UiLoadingBar(props) {
   return (
     <LinearProgress
-      style={LoadingBarStyle}
+      style={
+        props.style
+          ?
+          {
+            ...LoadingBarStyle,
+            ...props.style
+          }
+          :
+          LoadingBarStyle
+      }
       variant="indeterminate"
       color="primary"
     />
